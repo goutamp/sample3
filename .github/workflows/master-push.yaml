@@ -1,7 +1,7 @@
 ---
 name: Application CI Pipeline on Push
 env:
-  CONTAINER_IMAGE: pramanick1984/sample2
+  CONTAINER_IMAGE: pramanick1984/feature-sample2
 on:
   push:
     branches: [master]
@@ -14,6 +14,7 @@ jobs:
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          default-branch: master
           release-type: simple
           package-name: sample2
           
