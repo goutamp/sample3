@@ -1,6 +1,13 @@
 # Changelog
 
 
+### [2.0.1](https://www.github.com/goutamp/sample3/compare/v2.0.0...v2.0.1) (2021-05-19)
+
+
+### Bug Fixes
+
+* this is minor changes ([5a2a597](https://www.github.com/goutamp/sample3/commit/5a2a597882482cc3fddd1978e2a213646d148ec2))
+
 ### [1.0.3](https://www.github.com/goutamp/sample3/compare/v1.0.2...v1.0.3) (2021-05-19)
 
 
