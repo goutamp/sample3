@@ -1,15 +1,5 @@
 # Changelog
 
-## [2.0.0](https://www.github.com/goutamp/sample3/compare/v1.0.3...v2.0.0) (2021-05-19)
-
-
-### ⚠ BREAKING CHANGES
-
-* this is major release
-
-### Bug Fixes
-
-* this is major release ([22f0302](https://www.github.com/goutamp/sample3/commit/22f0302086d3efbb653cbad6604a9f8a98011aa5))
 
 ### [1.0.3](https://www.github.com/goutamp/sample3/compare/v1.0.2...v1.0.3) (2021-05-19)
 
