@@ -1,10 +1,10 @@
 ---
 name: Application CI Pipeline on Push
 env:
-  CONTAINER_IMAGE: pramanick1984/sample2
+  CONTAINER_IMAGE: pramanick1984/feature-sample2
 on:
   push:
-    branches: [master]
+    branches: [feature/*]
 jobs:
   build-publish-docker:
     runs-on: ubuntu-latest
