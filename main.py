@@ -9,7 +9,7 @@ def hello():
 
     """Return a friendly HTTP hello greeting."""
 
-    return 'Hello Istio_patch'
+    return 'Hello Istio_master_push'
 
 
 @app.errorhandler(500)
