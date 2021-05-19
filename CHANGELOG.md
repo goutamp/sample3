@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/goutamp/sample3/compare/v1.0.2...v1.0.3) (2021-05-19)
+
+
+### Bug Fixes
+
+* change the master branch ([782905e](https://www.github.com/goutamp/sample3/commit/782905e5451a4938da52f25579cfe5b150ecd934))
+
 ### [1.0.2](https://www.github.com/goutamp/sample3/compare/v1.0.1...v1.0.2) (2021-05-19)
 
 
