@@ -9,7 +9,11 @@ def hello():
 
     """Return a friendly HTTP hello greeting."""
 
+<<<<<<< HEAD
     return 'Hello Istiosha_'
+=======
+    return 'Hello Istio_master_push_patch'
+>>>>>>> a2642468e888504bc31d94a2d60e32ecc89c371f
 
 
 @app.errorhandler(500)
