@@ -1,0 +1,43 @@
+---
+name: Application CI Pipeline on Push
+env:
+  CONTAINER_IMAGE: pramanick1984/sample2
+on:
+  push:
+    branches: [master]
+jobs:
+  build-publish-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Release Please
+        uses: GoogleCloudPlatform/release-please-action@v2
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: simple
+          package-name: sample2
+          
+          
+      - name: Checkout code
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v2
+
+      - name: Build
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Create Version Tag
+        if: ${{ steps.release.outputs.release_created }}
+        id: version_tag
+        env:
+          VERSION_TAG: "${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
+        run: echo "::set-output name=version_tag::$(echo ${VERSION_TAG})"    
+
+      - name: Build and tag docker image
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          docker build . -t "${{env.CONTAINER_IMAGE}}:${{ steps.version_tag.outputs.version_tag }}"
+      - name: Publish docker image to dockerhub
+        if: ${{ steps.release.outputs.release_created }}
+        run: docker push ${{env.CONTAINER_IMAGE}}:${{ steps.version_tag.outputs.version_tag }}
