@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/goutamp/sample3/compare/v1.0.3...v1.0.4) (2021-05-20)
+
+
+### Bug Fixes
+
+* this is 1.0.4 ([ff6f485](https://www.github.com/goutamp/sample3/commit/ff6f485a1556d8b2f1abe39b0d97c600f9644c2e))
+
 ### [1.0.3](https://www.github.com/goutamp/sample3/compare/v1.0.2...v1.0.3) (2021-05-19)
 
 
