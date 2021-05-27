@@ -20,7 +20,7 @@ jobs:
           
           
       - name: Checkout code
-        if: ${{ steps.release.outputs.release_created }} == true
+        if: ${{ steps.release.outputs.release_created }} == false
         uses: actions/checkout@v2
 
       - name: Build
