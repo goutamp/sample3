@@ -22,7 +22,7 @@ jobs:
           package-name: sample2
       - name: Generate swagger json
         run: |
-          echo $secrets.GITHUB_TOKEN
+          echo "$secrets.GITHUB_TOKEN"
              
           
       - name: Checkout code
