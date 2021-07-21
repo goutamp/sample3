@@ -16,7 +16,7 @@ on:
 jobs:
   build-publish-docker-master:
     #if: github.ref == 'refs/heads/master'
-    if: ${{ (github.ref == 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
+    if: ${{ (github.ref == 'refs/heads/master') || (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Setup Release Please
