@@ -1,12 +1,22 @@
 ---
 name: Application CI Pipeline on Push
 env:
-  CONTAINER_IMAGE: pramanick1984/feature-sample2
+  CONTAINER_IMAGE: pramanick1984/sample2
+  CONTAINER_IMAGE_FET: pramanick1984/feature-sample2
+  
 on:
   push:
-    branches: [master]
+    branches: [master, feature/*]
+  workflow_run:
+    workflows: ["Dependabot PR Workflow"]
+    branches:
+      - 'dependabot/**'
+    types:
+      - requested  
 jobs:
-  build-publish-docker:
+  build-publish-docker-master:
+    #if: github.ref == 'refs/heads/master'
+    if: ${{ (github.ref == 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Setup Release Please
@@ -14,14 +24,25 @@ jobs:
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          default-branch: master
+         # default-branch: master
           release-type: simple
           package-name: sample2
-          
-          
-      - name: Checkout code
-        if: ${{ steps.release.outputs.release_created }}
+      
+        
+      - name: Checkout Code for dependabot PR
+        if: ${{ steps.release.outputs.release_created && github.actor == 'dependabot[bot]' }}
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Check out code
+        if: ${{ steps.release.outputs.release_created && github.actor != 'dependabot[bot]'}}
+        uses: actions/checkout@v2  
+       
+          
+     # - name: Checkout code
+     #   if: ${{ steps.release.outputs.release_created }}
+     #   uses: actions/checkout@v2
 
       - name: Build
         if: ${{ steps.release.outputs.release_created }}
@@ -42,3 +63,45 @@ jobs:
       - name: Publish docker image to dockerhub
         if: ${{ steps.release.outputs.release_created }}
         run: docker push ${{env.CONTAINER_IMAGE}}:${{ steps.version_tag.outputs.version_tag }}
+      - name: Checking the secret
+        run: |
+          echo "$USERNAME"
+          echo "This is from master branch"
+        
+    env:
+        USERNAME: ${{ secrets.GITHUB_TOKEN }}    
+        
+  build-publish-docker-feature:
+    #if: github.ref != 'refs/heads/master'
+    if: ${{ (github.ref != 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout Code for dependabot PR
+        if: ${{ github.actor == 'dependabot[bot]' }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Check out code
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        uses: actions/checkout@v2
+      
+        
+      #- name: Checkout code
+      #  uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}    
+
+      - name: Build and tag docker image
+        run: |
+          docker build . -t "${{env.CONTAINER_IMAGE_FET}}:${GITHUB_SHA::7}"
+      - name: Publish docker image to dockerhub
+        run: docker push ${{env.CONTAINER_IMAGE_FET}}:${GITHUB_SHA::7}
+      - name: Checking the secret
+        run: |
+          echo "$USERNAME"
+          echo "This is from feature branch"
+    env:
+        USERNAME: ${{ secrets.GITHUB_TOKEN }}    
