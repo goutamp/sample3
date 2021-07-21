@@ -27,9 +27,10 @@ jobs:
          # default-branch: master
           release-type: simple
           package-name: sample2
-      - name: Generate swagger json
+      - name: Checking if github token is published
         run: |
           echo "$secrets.GITHUB_TOKEN"
+          echo "$github.ref"
           
       - name: Checkout Code for dependabot PR
         if: ${{ steps.release.outputs.release_created && github.actor == 'dependabot[bot]' }}
@@ -69,7 +70,7 @@ jobs:
     #if: github.ref != 'refs/heads/master'
     if: ${{ (github.ref != 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
     runs-on: ubuntu-latest
-    steps:  
+    steps: 
       - name: Checkout Code for dependabot PR
         if: ${{ github.actor == 'dependabot[bot]' }}
         uses: actions/checkout@v2
@@ -79,6 +80,12 @@ jobs:
       - name: Check out code
         if: ${{ github.actor != 'dependabot[bot]' }}
         uses: actions/checkout@v2
+      
+      - name: Checking if github token is published
+        run: |
+           echo "$secrets.GITHUB_TOKEN"
+           echo "$github.ref"
+    
         
       #- name: Checkout code
       #  uses: actions/checkout@v2
