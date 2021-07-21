@@ -30,11 +30,20 @@ jobs:
       - name: Generate swagger json
         run: |
           echo "$secrets.GITHUB_TOKEN"
-             
           
-      - name: Checkout code
-        if: ${{ steps.release.outputs.release_created }}
+      - name: Checkout Code for dependabot PR
+        if: ${{ steps.release.outputs.release_created && github.actor == 'dependabot[bot]' }}
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Check out code
+        if: ${{ steps.release.outputs.release_created && github.actor != 'dependabot[bot]'}}
+        uses: actions/checkout@v2  
+          
+     # - name: Checkout code
+     #   if: ${{ steps.release.outputs.release_created }}
+     #   uses: actions/checkout@v2
 
       - name: Build
         if: ${{ steps.release.outputs.release_created }}
@@ -60,9 +69,19 @@ jobs:
     #if: github.ref != 'refs/heads/master'
     if: ${{ (github.ref != 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
     runs-on: ubuntu-latest
-    steps:   
-      - name: Checkout code
+    steps:  
+      - name: Checkout Code for dependabot PR
+        if: ${{ github.actor == 'dependabot[bot]' }}
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Check out code
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        uses: actions/checkout@v2
+        
+      #- name: Checkout code
+      #  uses: actions/checkout@v2
 
       - name: Build
         run: |
