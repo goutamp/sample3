@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/goutamp/sample3/compare/v1.0.6...v1.0.7) (2021-07-21)
+
+
+### Bug Fixes
+
+* test ([5522e53](https://www.github.com/goutamp/sample3/commit/5522e53991eb6f803278f2f9f736322dd19cd2b2))
+
 ### [1.0.6](https://www.github.com/goutamp/sample3/compare/v1.0.5...v1.0.6) (2021-07-21)
 
 
