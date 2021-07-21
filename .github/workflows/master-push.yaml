@@ -66,6 +66,7 @@ jobs:
       - name: Checking the secret
         run: |
           echo "$USERNAME"
+          echo "This is from master branch"
           echo "${github.ref}"
     env:
         USERNAME: ${{ secrets.GITHUB_TOKEN }}    
@@ -85,11 +86,6 @@ jobs:
         if: ${{ github.actor != 'dependabot[bot]' }}
         uses: actions/checkout@v2
       
-      - name: Checking if github token is published
-        run: |
-           echo "${secrets.GITHUB_TOKEN}"
-           echo "${github.ref}"
-    
         
       #- name: Checkout code
       #  uses: actions/checkout@v2
@@ -106,6 +102,7 @@ jobs:
       - name: Checking the secret
         run: |
           echo "$USERNAME"
+          echo "This is from feature branch"
           echo "${github.ref}"
     env:
         USERNAME: ${{ secrets.GITHUB_TOKEN }}    
