@@ -1,5 +1,19 @@
 # Changelog
 
+### [1.0.9](https://www.github.com/goutamp/sample3/compare/v1.0.8...v1.0.9) (2021-07-21)
+
+
+### Bug Fixes
+
+* afternoon ([fa9bc2e](https://www.github.com/goutamp/sample3/commit/fa9bc2e9d1ddf11525218e49a5a3fb3c7d1821c3))
+* feature test ([d4d24d0](https://www.github.com/goutamp/sample3/commit/d4d24d09d2c976a630b96e153133167ec21628d6))
+* remove the code ([c604bb4](https://www.github.com/goutamp/sample3/commit/c604bb451da6571fafe2acc45b5e215ab929073b))
+* this is goutam fix ([e678712](https://www.github.com/goutamp/sample3/commit/e67871273aaa375e7d8ca391dbadfd695c63c748))
+* this is goutam fix ([e678712](https://www.github.com/goutamp/sample3/commit/e67871273aaa375e7d8ca391dbadfd695c63c748))
+* this is goutam fix ([5093591](https://www.github.com/goutamp/sample3/commit/50935915f265f0388e41d5adfa6ef360bd76456d))
+* version upgrade ([37da1be](https://www.github.com/goutamp/sample3/commit/37da1be3f5b3a0c1ca2e566b38dcc8d154fcc00e))
+* version upgrade ([37da1be](https://www.github.com/goutamp/sample3/commit/37da1be3f5b3a0c1ca2e566b38dcc8d154fcc00e))
+
 ### [1.0.8](https://www.github.com/goutamp/sample3/compare/v1.0.7...v1.0.8) (2021-07-21)
 
 
