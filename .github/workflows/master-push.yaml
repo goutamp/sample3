@@ -16,7 +16,7 @@ on:
 jobs:
   build-publish-docker-master:
     #if: github.ref == 'refs/heads/master'
-    if: ${{ (github.ref == 'refs/heads/master') || (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
+    if: ${{ (github.ref == 'refs/heads/master') || (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) }}
     runs-on: ubuntu-latest
     steps:
       - name: Setup Release Please
@@ -35,14 +35,14 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
-      - name: Check out code
-        if: ${{ steps.release.outputs.release_created && github.actor != 'dependabot[bot]'}}
-        uses: actions/checkout@v2  
+    #  - name: Check out code
+     #   if: ${{ steps.release.outputs.release_created && github.actor != 'dependabot[bot]'}}
+     #   uses: actions/checkout@v2  
        
           
-     # - name: Checkout code
-     #   if: ${{ steps.release.outputs.release_created }}
-     #   uses: actions/checkout@v2
+      - name: Checkout code
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/checkout@v2
 
       - name: Build
         if: ${{ steps.release.outputs.release_created }}
