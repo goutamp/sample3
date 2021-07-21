@@ -73,7 +73,7 @@ jobs:
         
   build-publish-docker-feature:
     #if: github.ref != 'refs/heads/master'
-    if: ${{ (github.ref != 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) }}
+    if: ${{ (github.ref != 'refs/heads/master') || (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) }}
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout Code for dependabot PR
