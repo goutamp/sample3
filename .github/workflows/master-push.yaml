@@ -24,7 +24,7 @@ jobs:
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          default-branch: master
+         # default-branch: master
           release-type: simple
           package-name: sample2
       - name: Generate swagger json
