@@ -29,8 +29,8 @@ jobs:
           package-name: sample2
       - name: Checking if github token is published
         run: |
-          echo "$secrets.GITHUB_TOKEN"
-          echo "$github.ref"
+          echo "${secrets.GITHUB_TOKEN}"
+          echo "${github.ref}"
           
       - name: Checkout Code for dependabot PR
         if: ${{ steps.release.outputs.release_created && github.actor == 'dependabot[bot]' }}
@@ -83,8 +83,8 @@ jobs:
       
       - name: Checking if github token is published
         run: |
-           echo "$secrets.GITHUB_TOKEN"
-           echo "$github.ref"
+           echo "${secrets.GITHUB_TOKEN}"
+           echo "${github.ref}"
     
         
       #- name: Checkout code
