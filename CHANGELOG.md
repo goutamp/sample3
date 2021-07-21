@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.8](https://www.github.com/goutamp/sample3/compare/v1.0.7...v1.0.8) (2021-07-21)
+
+
+### Bug Fixes
+
+* testone ([d564478](https://www.github.com/goutamp/sample3/commit/d5644785146aac8c72954134ddae32a997a7df94))
+
 ### [1.0.7](https://www.github.com/goutamp/sample3/compare/v1.0.6...v1.0.7) (2021-07-21)
 
 
