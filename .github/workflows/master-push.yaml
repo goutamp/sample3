@@ -7,9 +7,16 @@ env:
 on:
   push:
     branches: [master, feature/*]
+  workflow_run:
+    workflows: ["Dependabot PR Workflow"]
+    branches:
+      - 'dependabot/**'
+    types:
+      - requested  
 jobs:
   build-publish-docker-master:
-    if: github.ref == 'refs/heads/master'
+    #if: github.ref == 'refs/heads/master'
+    if: ${{ (github.ref == 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Setup Release Please
@@ -50,7 +57,8 @@ jobs:
         run: docker push ${{env.CONTAINER_IMAGE}}:${{ steps.version_tag.outputs.version_tag }}
         
   build-publish-docker-feature:
-    if: github.ref != 'refs/heads/master'
+    #if: github.ref != 'refs/heads/master'
+    if: ${{ (github.ref != 'refs/heads/master') && (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) || (github.actor != 'dependabot[bot]') }}
     runs-on: ubuntu-latest
     steps:   
       - name: Checkout code
