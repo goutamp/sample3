@@ -9,7 +9,7 @@ def hello():
 
     """Return a friendly HTTP hello- greeting."""
 
-    return 'Hello Istiosh wedneday'
+    return 'Hello Istiosh wedneday1'
 
 
 @app.errorhandler(500)
