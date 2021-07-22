@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.10](https://www.github.com/goutamp/sample3/compare/v1.0.9...v1.0.10) (2021-07-22)
+
+
+### Bug Fixes
+
+* this is Thursday ([cb08122](https://www.github.com/goutamp/sample3/commit/cb081221a56102d3346c588e74e606e100b4ef35))
+
 ### [1.0.9](https://www.github.com/goutamp/sample3/compare/v1.0.8...v1.0.9) (2021-07-21)
 
 
