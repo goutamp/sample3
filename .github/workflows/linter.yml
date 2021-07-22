@@ -33,6 +33,6 @@ jobs:
         uses: github/super-linter@v3
         env:
           VALIDATE_ALL_CODEBASE: true
-          FILTER_REGEX_EXCLUDE: "(CHANGELOG.md)"
+          FILTER_REGEX_EXCLUDE: "(CHANGELOG.md|*.py)"
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
