@@ -19,6 +19,16 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ (github.actor == 'dependabot[bot]' && (github.event.action == 'requested' || github.event.action == 'completed')) || (github.actor != 'dependabot[bot]') }}
     steps:
+      - name: Create job check
+        id: initcheck
+        uses: LouisBrunner/checks-action@v1.1.2
+        if: ${{ github.actor == 'dependabot[bot]' }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Super linter
+          sha: ${{ github.event.workflow_run.head_sha }}
+          status: in_progress
+
       - name: Checkout Code for dependabot PR
         if: ${{ github.actor == 'dependabot[bot]' }}
         uses: actions/checkout@v2
@@ -36,3 +46,11 @@ jobs:
           FILTER_REGEX_EXCLUDE: "(*)"
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Conclude job check
+        uses: LouisBrunner/checks-action@v1.1.2
+        if: ${{ always() && github.actor == 'dependabot[bot]' }}
+        with:
+         token: ${{ secrets.GITHUB_TOKEN }}
+         sha: ${{ github.event.workflow_run.head_sha }}
+         check_id: ${{ steps.initcheck.outputs.check_id }}
+         conclusion: ${{ job.status }}
