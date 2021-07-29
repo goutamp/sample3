@@ -1,2 +1,2 @@
 # sample3
-<test>
+`<test>`
