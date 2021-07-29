@@ -1,0 +1,48 @@
+---
+name: Application CI Pipeline on Pull request and update the image to the QA repo
+env:
+  CONTAINER_IMAGE_QA: pramanick1984/qa
+  
+on:
+  pull_request:
+    branches: [master]
+  workflow_run:
+    workflows: ["Dependabot PR Workflow"]
+    branches:
+      - 'dependabot/**'
+    types:
+      - requested  
+jobs:
+build-publish-docker-qa:
+    #if: github.ref != 'refs/heads/master'
+    if: ${{ (github.ref == 'refs/heads/master') || (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) }}
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout Code for dependabot PR
+        if: ${{ github.actor == 'dependabot[bot]' }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      #- name: Check out code
+      #  if: ${{ github.actor != 'dependabot[bot]' }}
+      #  uses: actions/checkout@v2
+      
+        
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}    
+      - name: Build and tag docker image
+        run: |
+          docker build . -t "${{env.CONTAINER_IMAGE_QA}}:${GITHUB_SHA::7}"
+      - name: Publish docker image to dockerhub
+        run: docker push ${{env.CONTAINER_IMAGE_QA}}:${GITHUB_SHA::7}
+      - name: Checking the secret
+        run: |
+          echo "$USERNAME"
+          echo "This is from master branch and pushing into the QA bucket"
+    env:
+        USERNAME: ${{ secrets.GITHUB_TOKEN }}
