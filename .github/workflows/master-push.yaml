@@ -132,7 +132,7 @@ jobs:
 
       - name: Build and tag docker image
         run: |
-          docker build . -t "${{env.CONTAINER_IMAGE_FET}}:${GITHUB_SHA::7}"
+          docker build . -t "${{env.CONTAINER_IMAGE_QA}}:${GITHUB_SHA::7}"
       - name: Publish docker image to dockerhub
         run: docker push ${{env.CONTAINER_IMAGE_QA}}:${GITHUB_SHA::7}
       - name: Checking the secret
