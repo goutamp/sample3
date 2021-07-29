@@ -107,7 +107,7 @@ jobs:
     env:
         USERNAME: ${{ secrets.GITHUB_TOKEN }}    
         
-build-publish-docker-qa:
+  build-publish-docker-qa:
     #if: github.ref != 'refs/heads/master'
     if: ${{ (github.ref == 'refs/heads/master') || (github.actor == 'dependabot[bot]' && (github.event.action != 'requested' || github.event.action != 'completed')) }}
     runs-on: ubuntu-latest
