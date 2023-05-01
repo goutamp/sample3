@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.11](https://www.github.com/goutamp/sample3/compare/v1.0.10...v1.0.11) (2023-05-01)
+
+
+### Bug Fixes
+
+* revert tue ([2ef7fd2](https://www.github.com/goutamp/sample3/commit/2ef7fd24e9ac40ff167b647751f2bb91021c61ca))
+* tue ([a52d0e0](https://www.github.com/goutamp/sample3/commit/a52d0e03a3bb92e9c8086739f38e6c3d0a56b681))
+
 ### [1.0.10](https://www.github.com/goutamp/sample3/compare/v1.0.9...v1.0.10) (2021-07-22)
 
 
